@@ -60,9 +60,9 @@ const Home: React.FC = () => {
   ];
 
   const fetchImageFromUrl = async (url: string) => {
-  const apiKey = localStorage.getItem("apiKey"); // get from browser only
+  const apiKey = process.env.REACT_APP_API_KEY; // use env variable
   if (!apiKey) {
-    console.warn("⚠️ No API key found in localStorage.");
+    console.warn("⚠️ No API key found in environment variables.");
     return "";
   }
 
@@ -83,6 +83,7 @@ const Home: React.FC = () => {
     return "";
   }
 };
+
 
 
   const handleAddOrEdit = async () => {
