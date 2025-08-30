@@ -1,5 +1,5 @@
 {
-  "homepage":"https://nawrasw.github.io/Favorite-Sites/",
+  "homepage": "https://nawrasw.github.io/Favorite-Sites/",
   "name": "favourite-sites",
   "version": "0.1.0",
   "private": true,
@@ -23,9 +23,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build",
-"deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "proxy": "https://api.linkpreview.net",
   "eslintConfig": {
     "extends": [
       "react-app",
