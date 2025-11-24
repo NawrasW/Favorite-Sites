@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card.tsx";
 import Category from "../components/Category.tsx";
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Bookmark {
   id: number;
@@ -20,6 +21,8 @@ const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
+
+const notify = () => toast("Wow so easy!");
 
   const [confirmation, setConfirmation] = useState<{
     id: number | null;
@@ -88,7 +91,8 @@ const Home: React.FC = () => {
 
   const handleAddOrEdit = async () => {
     if (!inputTask || !inputLink || !selectedValue) {
-      alert("Name, Link and Category are required!");
+      toast.warn("Name, Link and Category are required!");
+      //alert("Name, Link and Category are required!");
       return;
     }
 
@@ -109,6 +113,7 @@ const Home: React.FC = () => {
         )
       );
       setEditId(null);
+      toast.success("Bookmarked Updated");
     } else {
       const newBookmark: Bookmark = {
         id: Math.random(),
@@ -118,6 +123,7 @@ const Home: React.FC = () => {
         category: selectedValue,
       };
       setList([...list, newBookmark]);
+      toast.success("Bookmarked Added");
     }
 
     setInputTask("");
@@ -132,12 +138,14 @@ const Home: React.FC = () => {
       setSelectedValue(taskToEdit.category || "All");
       setEditId(id);
     }
+    
   };
 
   const handleDelete = (id: number) => setConfirmation({ id, visible: true });
   const confirmDelete = () => {
     if (confirmation.id !== null) {
       setList(list.filter((item) => item.id !== confirmation.id));
+      toast.error("Bookmarked Deleted");
     }
     setConfirmation({ id: null, visible: false });
   };
@@ -212,7 +220,7 @@ const currentItems = filteredAndSearchedItems.slice(
           >
             {editId !== null ? "Update Bookmark" : "Add Bookmark"}
           </button>
-
+          <ToastContainer position="bottom-left" theme="dark" />
           <input
             type="text"
             placeholder="Search..."
